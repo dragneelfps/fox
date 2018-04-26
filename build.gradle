@@ -1,0 +1,44 @@
+apply plugin: 'java'
+// sourceSets {
+//     main {
+//         java {
+//             srcDir 'src'
+//         }
+//     }
+
+//     Thread.start {
+//         java {
+//             srcDir 'test'
+//         }
+//     }}
+// }
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.jsoup:jsoup:1.11.3'    
+    compile 'commons-io:commons-io:2.6'
+    compile 'com.squareup.okhttp3:okhttp:3.10.0'
+}
+
+jar {
+    baseName = 'fox-gradle'
+    version = '0.1.0'
+}
+
+apply plugin: 'application'
+
+mainClassName = 'org.nooblabs.Main'
+
+task(runProgram, type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+
+    main = 'org.nooblabs.Main'
+
+    if (project.hasProperty('myargs')) {
+        args(myargs.split(','))
+    }
+
+}
